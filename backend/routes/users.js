@@ -26,7 +26,6 @@ router.post('/register',async(req,res)=>{
     }
 })
 
-//Login
-
+//Login tomorrow
 
 module.exports=router
