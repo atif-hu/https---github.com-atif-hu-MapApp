@@ -10,7 +10,7 @@ function App() {
     latitude: 20.5937,
     longitude:78.9629,
     zoom: 5,
-  });
+  }); 
   const [showPopup, setShowPopup] = useState(true);
   const [pins,setPins]=useState([])
   useEffect(()=>{
