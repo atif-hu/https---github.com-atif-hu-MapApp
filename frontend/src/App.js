@@ -33,31 +33,36 @@ function App() {
     onMove={viewport => setViewport(viewport)}
     mapStyle="mapbox://styles/mapbox/streets-v9">
       
+      {/* {pins.map(p=>(
 
-       <Marker latitude={27.1751} longitude={78.0421}   >
-        <Room style={{fontSize:viewport.zoom * 7 ,color:"slateblue"}}></Room>
-     </Marker>
-     {/* {showPopup && (
-      <Popup  latitude={27.1751} longitude={78.0421}
-        anchor="left">
-        <div className="card">
-          <label>Place</label>
-          <h4 className="place">Taj Mahal</h4>
-          <label>Review</label>
-          <p className="description">Beatiful place. I like it.</p>
-          <label>Rating</label>
-          <div className="stars">
+        <>
+          <Marker latitude={p.lat} longitude={p.long}   >
+              <Room style={{fontSize:viewport.zoom * 7 ,color:"slateblue"}}></Room>
+          </Marker>
+          
+          {showPopup && (
+            <Popup  latitude={p.lat} longitude={p.long}
+            anchor="left">
+            <div className="card">
+            <label>Place</label>
+            <h4 className="place">{p.title}</h4>
+            <label>Review</label>
+            <p className="description">{p.desc}</p>
+            <label>Rating</label>
+            <div className="stars">
             <Star className="star"/>
             <Star className="star"/>
             <Star className="star"/>
             <Star className="star"/>
             <Star className="star"/>
-          </div>
-          <label>Information</label>
-          <span className="username">Created by <b>Atif</b></span>
-          <span className="date">1 hour ago</span>
-        </div>
-      </Popup>)} */}
+            </div>
+            <label>Information</label>
+            <span className="username">Created by <b>{p.username}</b></span>
+            <span className="date">1 hour ago</span>
+            </div>
+            </Popup>)}
+        </>
+      ))} */}
     </Map>
     ;
     </div>
