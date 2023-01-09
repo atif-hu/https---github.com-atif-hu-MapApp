@@ -4,6 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import {Room,Star} from "@material-ui/icons"
 import './app.css'
 import axios from 'axios'
+import {format} from 'timeago.js'
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -33,7 +34,7 @@ function App() {
     onMove={viewport => setViewport(viewport)}
     mapStyle="mapbox://styles/mapbox/streets-v9">
       
-      {/* {pins.map(p=>(
+      {pins.map(p=>(
 
         <>
           <Marker latitude={p.lat} longitude={p.long}   >
@@ -58,13 +59,13 @@ function App() {
             </div>
             <label>Information</label>
             <span className="username">Created by <b>{p.username}</b></span>
-            <span className="date">1 hour ago</span>
+            <span className="date">{format(p.createdAt)}</span>
             </div>
             </Popup>)}
         </>
-      ))} */}
+      ))}
     </Map>
-    ;
+
     </div>
   );
 }
