@@ -12,8 +12,13 @@ function App() {
     longitude:78.9629,
     zoom: 5,
   }); 
-  const [showPopup, setShowPopup] = useState(true);
+
+  // const [showPopup, setShowPopup] = useState(true);
+  const currentUser="Atif"
   const [pins,setPins]=useState([])
+  const [currentPlaceId,setCurrentPlaceId]=useState(false)
+  const [newPlace,setNewPlace]=useState(null)
+
   useEffect(()=>{
     const getPins=async()=>{
         try {
@@ -26,44 +31,75 @@ function App() {
     getPins()
   },[])
 
+  const handleMarkerClick=(id,lat,long)=>{
+    if(currentPlaceId) setCurrentPlaceId(false);
+    else setCurrentPlaceId(id);
+    setViewport({...viewport,latitude:lat,longitude:long})
+    
+  }
+
+  const handleAddClick=(e)=>{
+    const lat=e.lngLat.lat;
+    const long=e.lngLat.lng;
+    setNewPlace({lat,long})
+  }
+
   return (
-    <div className="App" style={{ height: "100vh", width: "100%" }}>
+    <div className="App" style={{ height: "100vh", width: "90%" }}>
      <Map
     {...viewport}
     mapboxAccessToken={process.env.REACT_APP_MAPBOX}
     onMove={viewport => setViewport(viewport)}
-    mapStyle="mapbox://styles/mapbox/streets-v9">
+    mapStyle="mapbox://styles/mapbox/streets-v9"
+    onDblClick={handleAddClick}
+    >
       
       {pins.map(p=>(
 
         <>
           <Marker latitude={p.lat} longitude={p.long}   >
-              <Room style={{fontSize:viewport.zoom * 7 ,color:"slateblue"}}></Room>
+              <Room style={{fontSize:viewport.zoom * 6 ,color:p.username===currentUser?"tomato":"slateblue",
+              cursor:"pointer"}}
+                    onClick={()=>handleMarkerClick(p._id,p.lat,p.long)}   
+              />
           </Marker>
-          
-          {showPopup && (
+        
+          {p._id===currentPlaceId && (
+            
             <Popup  latitude={p.lat} longitude={p.long}
-            anchor="left">
-            <div className="card">
-            <label>Place</label>
-            <h4 className="place">{p.title}</h4>
-            <label>Review</label>
-            <p className="description">{p.desc}</p>
-            <label>Rating</label>
-            <div className="stars">
-            <Star className="star"/>
-            <Star className="star"/>
-            <Star className="star"/>
-            <Star className="star"/>
-            <Star className="star"/>
-            </div>
-            <label>Information</label>
-            <span className="username">Created by <b>{p.username}</b></span>
-            <span className="date">{format(p.createdAt)}</span>
-            </div>
+            anchor="left" closeButton={true} closeOnClick={false} onClose={()=>setCurrentPlaceId(false)}>
+              <div className="card">
+              <label>Place</label>
+              <h4 className="place">{p.title}</h4>
+              <label>Review</label>
+              <p className="description">{p.desc}</p>
+              <label>Rating</label>
+              <div className="stars">
+              <Star className="star"/>
+              <Star className="star"/>
+              <Star className="star"/>
+              <Star className="star"/>
+              <Star className="star"/>
+              </div>
+              <label>Information</label>
+              <span className="username">Created by <b>{p.username}</b></span>
+              <span className="date">{format(p.createdAt)}</span>
+              </div>
             </Popup>)}
+          
         </>
       ))}
+        {newPlace && (
+          <Popup  
+          latitude={newPlace.lat} 
+          longitude={newPlace.long}
+          anchor="left" 
+          closeButton={true} closeOnClick={false} onClose={()=>setNewPlace(null)}>
+
+          hello
+
+        </Popup>
+        )}
     </Map>
 
     </div>
