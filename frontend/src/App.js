@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ height: "100vh", width: "90%" }}>
+    <div className="App" style={{ height: "100vh", width: "100%" }}>
      <Map
     {...viewport}
     mapboxAccessToken={process.env.REACT_APP_MAPBOX}
@@ -96,7 +96,24 @@ function App() {
           anchor="left" 
           closeButton={true} closeOnClick={false} onClose={()=>setNewPlace(null)}>
 
-          hello
+          <div>
+            <form action="">
+                <label>Title</label>
+                <input placeholder="Enter a title" />
+                <label>Review</label>
+                <textarea placeholder="Say us something about this place"></textarea>
+                <label>Rating</label>
+                <select>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button className="submitButton" type="submit">Add Pin</button>
+
+            </form>
+          </div>
 
         </Popup>
         )}
