@@ -18,6 +18,9 @@ function App() {
   const [pins,setPins]=useState([])
   const [currentPlaceId,setCurrentPlaceId]=useState(false)
   const [newPlace,setNewPlace]=useState(null)
+  const [title,setTitle]=useState(null)
+  const [desc,setDesc]=useState(null)
+  const [rating,setRating]=useState(0)
 
   useEffect(()=>{
     const getPins=async()=>{
@@ -44,6 +47,25 @@ function App() {
     setNewPlace({lat,long})
   }
 
+  const handleSubmit=async (e)=>{
+    e.preventDefault();
+    const newPin={
+      username:currentUser,
+      title,
+      desc,
+      rating,
+      lat: newPlace.lat,
+      long:newPlace.long,
+    }
+
+    try {
+        const res=await axios.post('/pins',newPin);
+        setPins([...pins,res.data]);
+        setNewPlace(null);
+    } catch (err) {
+        console.log(err);
+    }
+  }
   return (
     <div className="App" style={{ height: "100vh", width: "100%" }}>
      <Map
@@ -97,13 +119,17 @@ function App() {
           closeButton={true} closeOnClick={false} onClose={()=>setNewPlace(null)}>
 
           <div>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <label>Title</label>
-                <input placeholder="Enter a title" />
+                <input placeholder="Enter a title" 
+                 onChange={(e)=>setTitle(e.target.value)}
+                />
                 <label>Review</label>
-                <textarea placeholder="Say us something about this place"></textarea>
+                <textarea placeholder="Say us something about this place"
+                onChange={(e)=>setDesc(e.target.value)}
+                ></textarea>
                 <label>Rating</label>
-                <select>
+                <select onChange={(e)=>setRating(e.target.value)}>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
