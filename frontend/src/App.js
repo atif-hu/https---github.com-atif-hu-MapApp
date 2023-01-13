@@ -14,7 +14,7 @@ function App() {
   }); 
 
   // const [showPopup, setShowPopup] = useState(true);
-  const currentUser="Atif"
+  const currentUser="Miran"
   const [pins,setPins]=useState([])
   const [currentPlaceId,setCurrentPlaceId]=useState(false)
   const [newPlace,setNewPlace]=useState(null)
@@ -66,20 +66,26 @@ function App() {
         console.log(err);
     }
   }
+
   return (
     <div className="App" style={{ height: "100vh", width: "100%" }}>
      <Map
     {...viewport}
     mapboxAccessToken={process.env.REACT_APP_MAPBOX}
     onMove={viewport => setViewport(viewport)}
-    mapStyle="mapbox://styles/mapbox/streets-v9"
+    mapStyle="mapbox://styles/atifhussain28/clcuzkpsx001v16ql0v7ppan1"
     onDblClick={handleAddClick}
     >
       
       {pins.map(p=>(
 
         <>
-          <Marker latitude={p.lat} longitude={p.long}   >
+          <Marker 
+            latitude={p.lat} 
+            longitude={p.long}
+            offsetLeft={viewport.zoom * 3}
+            offsetTop={-viewport.zoom * 6}
+            >
               <Room style={{fontSize:viewport.zoom * 6 ,color:p.username===currentUser?"tomato":"slateblue",
               cursor:"pointer"}}
                     onClick={()=>handleMarkerClick(p._id,p.lat,p.long)}   
@@ -97,11 +103,7 @@ function App() {
               <p className="description">{p.desc}</p>
               <label>Rating</label>
               <div className="stars">
-              <Star className="star"/>
-              <Star className="star"/>
-              <Star className="star"/>
-              <Star className="star"/>
-              <Star className="star"/>
+              {Array(p.rating).fill(<Star className="star"/>)}
               </div>
               <label>Information</label>
               <span className="username">Created by <b>{p.username}</b></span>
@@ -143,6 +145,13 @@ function App() {
 
         </Popup>
         )}
+        <div style={{zindex:"1", position:"relative"}}>
+          
+          <button className="button logout">Logout</button>
+          <button className="button login">Login</button>
+          <button className="button register">Register</button>
+        </div>
+
     </Map>
 
     </div>
