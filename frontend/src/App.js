@@ -22,6 +22,8 @@ function App() {
   const [title,setTitle]=useState(null)
   const [desc,setDesc]=useState(null)
   const [rating,setRating]=useState(0)
+  const [showRegister,setShowRegister]=useState(false)
+  const [showLogin,setShowLogin]=useState(false)
 
   useEffect(()=>{
     const getPins=async()=>{
@@ -149,11 +151,12 @@ function App() {
         )}
         {currentUser?(<button className="button logout">Logout</button>):
         (<div className="buttons">
-        <button className="button login">Login</button>
-        <button className="button register">Register</button>
+        <button className="button login" onClick={()=>setShowLogin(true)}>Login</button>
+        <button className="button register" onClick={()=>setShowRegister(true)}>Register</button>
       </div>)}
 
-        <Register/>
+         {showRegister &&(<Register/>)} 
+         {/* {showLogin &&()} */}
     </Map>
 
     </div>

@@ -26,6 +26,7 @@
     background-color: slateblue;
     color: white;
     padding: 5px;
+    cursor: pointer;
 }
 
 .success{
@@ -37,4 +38,11 @@
     color: red;
     font-size: 12px;
     text-align: center;
+}
+
+.cancelBtn{
+    position: absolute;
+    right: 5px;    
+    top: 5px;
+    cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import './register.css'
-import { Room } from '@material-ui/icons'
+import { Room,Cancel } from '@material-ui/icons'
 import { useState } from 'react'
 import { useRef } from 'react'
 import axios from 'axios'
@@ -8,6 +8,7 @@ function Register() {
 
     const [success,setSuccess]=useState(false)
     const [error,setError]=useState(false)
+
     const nameRef=useRef()
     const emailRef=useRef()
     const passwordRef=useRef()
@@ -46,6 +47,7 @@ function Register() {
             {error && <span className="failure">Something went wrong!</span>}
 
         </form>
+        <Cancel className='cancelBtn' />
     </div>
   )
 }

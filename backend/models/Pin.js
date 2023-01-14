@@ -3,31 +3,31 @@ const mongoose=require('mongoose');
 const PinSchema=new mongoose.Schema({
     username:{
         type:String,
-        require:true,
+        required:true,
     },
     title:{
         type:String,
-        require:true,
+        required:true,
         min:3,
     },
     desc:{
         type:String,
-        require:true,
+        required:true,
         min:3,
     },
     rating:{
         type:Number,
-        require:true,
+        required:true,
         min:0,
         max:5,
     },
     lat:{
         type:Number,
-        require:true
+        required:true
     },
     long:{
         type:Number,
-        require:true
+        required:true
     }
 }, 
     {timestamps:true}
