@@ -5,6 +5,7 @@ import {Room,Star} from "@material-ui/icons"
 import './app.css'
 import axios from 'axios'
 import {format} from 'timeago.js'
+import Register from "./components/Register";
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -14,7 +15,7 @@ function App() {
   }); 
 
   // const [showPopup, setShowPopup] = useState(true);
-  const currentUser="Miran"
+  const [currentUser,setCurrentUser]=useState(null)
   const [pins,setPins]=useState([])
   const [currentPlaceId,setCurrentPlaceId]=useState(false)
   const [newPlace,setNewPlace]=useState(null)
@@ -66,6 +67,7 @@ function App() {
         console.log(err);
     }
   }
+
 
   return (
     <div className="App" style={{ height: "100vh", width: "100%" }}>
@@ -145,13 +147,13 @@ function App() {
 
         </Popup>
         )}
-        <div style={{zindex:"1", position:"relative"}}>
-          
-          <button className="button logout">Logout</button>
-          <button className="button login">Login</button>
-          <button className="button register">Register</button>
-        </div>
+        {currentUser?(<button className="button logout">Logout</button>):
+        (<div className="buttons">
+        <button className="button login">Login</button>
+        <button className="button register">Register</button>
+      </div>)}
 
+        <Register/>
     </Map>
 
     </div>
