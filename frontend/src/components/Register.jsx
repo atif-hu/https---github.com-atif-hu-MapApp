@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRef } from 'react'
 import axios from 'axios'
 
-function Register() {
+function Register({setShowRegister}) {
 
     const [success,setSuccess]=useState(false)
     const [error,setError]=useState(false)
@@ -33,7 +33,7 @@ function Register() {
 
   return (
     <div className='registerContainer' style={{zIndex:"1", position:"absolute"}}>
-        <div className="logo">
+        <div className="logoR">
             <Room/>
             MappApp
         </div>
@@ -47,7 +47,7 @@ function Register() {
             {error && <span className="failure">Something went wrong!</span>}
 
         </form>
-        <Cancel className='cancelBtn' />
+        <Cancel className='cancelBtn' onClick={()=>setShowRegister(false)}/>
     </div>
   )
 }

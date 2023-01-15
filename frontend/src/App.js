@@ -6,6 +6,7 @@ import './app.css'
 import axios from 'axios'
 import {format} from 'timeago.js'
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -15,6 +16,7 @@ function App() {
   }); 
 
   // const [showPopup, setShowPopup] = useState(true);
+  const myStorage=window.localStorage
   const [currentUser,setCurrentUser]=useState(null)
   const [pins,setPins]=useState([])
   const [currentPlaceId,setCurrentPlaceId]=useState(false)
@@ -155,8 +157,8 @@ function App() {
         <button className="button register" onClick={()=>setShowRegister(true)}>Register</button>
       </div>)}
 
-         {showRegister &&(<Register/>)} 
-         {/* {showLogin &&()} */}
+         {showRegister &&(<Register setShowRegister={setShowRegister}/>)} 
+         {showLogin && (<Login setShowLogin={setShowLogin} myStorage={myStorage} setCurrentUser={setCurrentUser}/>)}
     </Map>
 
     </div>
