@@ -17,7 +17,7 @@ function App() {
 
   // const [showPopup, setShowPopup] = useState(true);
   const myStorage=window.localStorage
-  const [currentUser,setCurrentUser]=useState(null)
+  const [currentUser,setCurrentUser]=useState(myStorage.getItem("user"))
   const [pins,setPins]=useState([])
   const [currentPlaceId,setCurrentPlaceId]=useState(false)
   const [newPlace,setNewPlace]=useState(null)
@@ -72,6 +72,10 @@ function App() {
     }
   }
 
+  const handleLogoutClick=()=>{
+    myStorage.removeItem("user");
+    setCurrentUser(null);
+  }
 
   return (
     <div className="App" style={{ height: "100vh", width: "100%" }}>
@@ -151,7 +155,7 @@ function App() {
 
         </Popup>
         )}
-        {currentUser?(<button className="button logout">Logout</button>):
+        {currentUser?(<button className="button logout" onClick={handleLogoutClick}>Logout</button>):
         (<div className="buttons">
         <button className="button login" onClick={()=>setShowLogin(true)}>Login</button>
         <button className="button register" onClick={()=>setShowRegister(true)}>Register</button>
