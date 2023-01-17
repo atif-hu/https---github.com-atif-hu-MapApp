@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
 app.use('/api/pins',pinRoute )
 app.use('/api/users',users)
 
-app.listen(8800,()=>{
+port = process.env.PORT||8800;
+app.listen(port,()=>{
     console.log("Backend server is running")
 }) 
